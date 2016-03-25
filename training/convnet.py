@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
+from sets import Mnist
 
 
 class Convnet:
@@ -73,9 +74,7 @@ def evaluation(y, pred):
 
 
 # Definition
-x = tf.placeholder(tf.float32, [None, 784])
-x_image = tf.reshape(x, [-1, 28, 28, 1])
-
+x = tf.placeholder(tf.float32, [None, 28, 28])
 y = tf.placeholder(tf.float32, [None, 10])
 model = Convnet(x)
 training = optimization(y, model.prediction)
@@ -86,12 +85,12 @@ sess = tf.InteractiveSession()
 sess.run(tf.initialize_all_variables())
 
 # Training
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+train, test = Mnist()()
 for i in range(20000):
-    batch = mnist.train.next_batch(50)
+    batch = train.random_batch(50)
     training.run(feed_dict={x: batch[0], y: batch[1], model.dropout: 0.5})
     if i % 100 == 0:
-        testset = {x: mnist.test.images,
-                   y: mnist.test.labels,
+        testset = {x: test.data,
+                   y: test.target,
                    model.dropout: 1.0}
         print('Step:', i, 'Test accuracy:', accuracy.eval(feed_dict=testset))
