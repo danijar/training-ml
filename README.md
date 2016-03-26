@@ -9,7 +9,7 @@ Instructions
 ```shell
 virtualenv . -p python3 --system-site-packages && source bin/activate
 pip3 install -r requirements.txt
-python3 -m training.convnet.py
+python3 -m training.convnet
 ```
 
 Scripts
