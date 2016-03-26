@@ -1,5 +1,4 @@
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
 from sets import Mnist
 
 
@@ -45,7 +44,7 @@ class Convnet:
     def layer_softmax(self, x, size):
         in_size = int(x.get_shape()[1])
         weight = self.create_weight([in_size, size])
-        bias = self.create_bias([10])
+        bias = self.create_bias([size])
         x = tf.matmul(x, weight) + bias
         x = tf.nn.softmax(x)
         return x

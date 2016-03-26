@@ -18,3 +18,4 @@ Scripts
 | Name | Description | Result |
 | ---- | ----------- | ------ |
 | `convnet` | A standard convolutional network trained on MINST | 0.73% |
+| `lstm` | An LSTM network trained on rows of MINST images | 1.42% |
